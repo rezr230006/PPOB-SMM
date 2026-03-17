@@ -1,73 +1,52 @@
 // path: README.md
 
-# PPOB-SMM Platform
+# PPOB-SMM
 
-PPOB-SMM adalah platform payment point online billing (PPOB) dan social media marketing (SMM) yang komprehensif untuk jasa pembayaran dan layanan interaksi media sosial.
+PPOB-SMM adalah panel web untuk layanan Pembayaran Pascabayar Online (PPOB) dan Social Media Marketing (SMM) yang dikembangkan berdasarkan proyek Kincai Payment. Panel ini menyediakan berbagai layanan pembayaran seperti pulsa, paket data, token listrik, pembayaran tagihan, layanan SMM, dan banyak lagi.
 
 ## Fitur Utama
 
-### 📦 Layanan PPOB
-- **Pulsa & Data** - Pulsa reguler, pulsa internasional, paket data, SMS
-- **Token Listrik** - Pembayaran token PLN prabayar
-- **Pascabayar** - PLN, PDAM, BPJS Kesehatan, HP Postpaid, Internet
-- **Multifinance** - Angsuran multifinance
-- **Voucher Game** - Voucher game online
-- **e-Money** - Dana, OVO, GoPay, LinkAja, ShopeePay
-- **WiFi ID** - Pembayaran WiFi ID
+- **PPOB Services**: Pulsa, Data, PLN, PDAM, BPJS, Pajak, TV, dan lainnya
+- **Social Media Marketing**: Likes, Followers, Comments, Views untuk Instagram, Facebook, TikTok, dll
+- **Sistem Deposit**: Deposit via bank transfer, e-wallet, dan pulsa
+- **Panel Admin**: Manajemen pengguna, layanan, kategori, transaksi, dan laporan
+- **Sistem Referral**: Program undangan untuk pengguna baru
+- **Payment Gateway**: Integrasi dengan berbagai metode pembayaran
+- **Responsive Design**: Tampilan yang optimal di desktop dan mobile
 
-### 📱 Layanan SMM
-- Instagram: Like, Comment, Follow, Share
-- Facebook: Like, Comment, Share
-- YouTube: Views, Likes, Subscribers
-- Twitter: Likes, Retweets, Followers
-- TikTok: Views, Likes, Followers
+## Informasi Proyek
 
-### 💳 Sistem Pembayaran
-- Bank Transfer (BCA, Mandiri, BNI, BSI)
-- E-Wallet (DANA, OVO, GoPay, LinkAja)
-- Pulsa Transfer (XL, Telkomsel, Indosat)
-- Voucher Game (Steam, Google Play, App Store)
-- Cryptocurrency (Bitcoin, Ethereum)
+### Versi Source Code
+Proyek ini adalah modifikasi dari **Web Panel PPOB dan SMM Kincai Payment** yang asli. Versi original dapat ditemukan di:
+[MyCoding.ID - Web Panel PPOB dan SMM Kincai Payment](https://mycoding.id/item/113/web-panel-ppob-dan-smm-kincai-payment)
 
-### 🎯 Fitur Sistem
-- Auto Service Sync (setiap 6 jam)
-- Order Status Worker (setiap 5 menit)
-- Referral System dengan kode undangan
-- Dashboard Admin terintegrasi
-- Webhook Security dengan signature validation
-- Responsive design untuk mobile & desktop
+### Pengembang
+Proyek ini dimodifikasi dan dikembangkan oleh **Rezr230006**. Sebagai pengembang utama, Rezr230006 bertanggung jawab atas:
+- Pengembangan fitur baru
+- Peningkatan performa sistem
+- Pemeliharaan dan update berkala
+- Integrasi payment gateway
+- Penyesuaian dengan kebutuhan modern
 
-## Persyaratan Sistem
+### Dukung Pengembangan
+Jika Anda merasa project ini bermanfaat dan ingin mendukung pengembangan lebih lanjut, Anda dapat memberikan donasi melalui platform Saweria:
 
-### Server Requirements
-- PHP 7.4 atau lebih tinggi
-- MySQL 5.7 atau lebih tinggi
-- cPanel/Plesk untuk shared hosting
-- Sertifikat SSL (HTTPS)
-- Cron Jobs untuk otomasi
+[![Saweria](https://img.shields.io/badge/Donasi-Saweria-pink?style=for-the-badge&logo=saweria)](https://saweria.co/rezr230006)
 
-### PHP Extensions
-- PDO MySQL
-- cURL
-- JSON
-- OpenSSL
-- GD Library atau Imagick
-- Mbstring
+**Link Donasi:** https://saweria.co/rezr230006
 
-## Instalasi di Shared Hosting
+Donasi Anda akan digunakan untuk:
+- Biaya hosting dan domain
+- Pembelian API layanan PPOB
+- Pengembangan fitur baru
+- Maintenance dan update sistem
+- Support teknis kepada pengguna
 
-### 1. Upload File
-- Upload seluruh file ke direktori utama hosting (biasanya `public_html`)
+Terima kasih atas dukungan Anda! 🙏
 
-### 2. Buat Database
-- Login ke cPanel
-- Buat database baru melalui "MySQL Databases"
-- Buat user database dan berikan semua privilages
+## Instalasi
 
-### 3. Konfigurasi Database
-- Edit file `config.php`:
-```php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'username_database');
-define('DB_PASS', 'password_database');
-define('DB_NAME', 'nama_database');
+1. Ekstrak file ZIP ke folder server web Anda
+2. Buat database MySQL dan import `DB kincaipayment.sql`
+3. Edit file `config.php` dengan informasi database Anda
+4. Atur permission folder:
