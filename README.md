@@ -62,6 +62,6 @@ Proyek ini dimodifikasi dari Kincai Payment dan dilisensikan di bawah lisensi ya
 ## Kontak
 
 Untuk pertanyaan, dukungan teknis, atau kerjasama, silakan hubungi:
-- Email: support@rezr230006.com
-- WhatsApp: +62 8xx-xxxx-xxxx
+- Email: rezr230006@gmail.com
+- WhatsApp: +62 857-1203-6145
 - Saweria: https://saweria.co/rezr230006
