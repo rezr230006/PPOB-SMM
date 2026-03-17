@@ -50,3 +50,18 @@ Terima kasih atas dukungan Anda! 🙏
 2. Buat database MySQL dan import `DB kincaipayment.sql`
 3. Edit file `config.php` dengan informasi database Anda
 4. Atur permission folder:
+chmod -R 755 action/ chmod -R 755 ajax/ chmod -R 755 admin/ chmod -R 755 cron/ chmod -R 755 library/ chmod -R 755 upload/ chmod -R 777 assets/media/
+
+6. Atur cron job untuk file `cron/check-orders.sh`
+7. Akses panel admin melalui `admin/index.php`
+
+## Lisensi
+
+Proyek ini dimodifikasi dari Kincai Payment dan dilisensikan di bawah lisensi yang berlaku untuk versi original. Untuk informasi lisensi lengkap, silakan lihat dokumentasi original dari MyCoding.ID.
+
+## Kontak
+
+Untuk pertanyaan, dukungan teknis, atau kerjasama, silakan hubungi:
+- Email: support@rezr230006.com
+- WhatsApp: +62 8xx-xxxx-xxxx
+- Saweria: https://saweria.co/rezr230006
