@@ -51,7 +51,7 @@ Terima kasih atas dukungan Anda! 🙏
 3. Edit file `config.php` dengan informasi database Anda
 4. Atur permission folder:
 
-chmod -R 755 action/ chmod -R 755 ajax/ chmod -R 755 admin/ chmod -R 755 cron/ chmod -R 755 library/ chmod -R 755 upload/ chmod -R 777 assets/media/
+`chmod -R 755 action/ chmod -R 755 ajax/ chmod -R 755 admin/ chmod -R 755 cron/ chmod -R 755 library/ chmod -R 755 upload/ chmod -R 777 assets/media/`
 
 6. Atur cron job untuk file `cron/check-orders.sh`
 7. Akses panel admin melalui `admin/index.php`
