@@ -1,39 +1,24 @@
+// path: config.php
 <?php
-date_default_timezone_set('Asia/Jakarta');
-error_reporting(0);
+// Database configuration
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'kincaipayment');
 
-// status
-// 1 = Ya
-// 0 = Tidak
-$maintenance = 0;
-if($maintenance == 1) {
-	die("<h1>Sistem dalam Perbaikan.<br/>System Under Maintenance.</h1>");
-}
+// Pakasir Configuration
+define('PAKASIR_API_KEY', 'your_pakasir_api_key');
+define('PAKASIR_SECRET_KEY', 'your_pakasir_secret_key');
+define('PAKASIR_MERCHANT_ID', 'your_pakasir_merchant_id');
+define('PAKASIR_WEBHOOK_URL', 'https://yourdomain.com/action/callback-pakasir.php');
 
-// database
-$config['db'] = array(
-	'host' => 'localhost',
-	'name' => '', //Ganti dengan nama database anda
-	'username' => '', //Ganti dengan username database anda
-	'password' => '' //Ganti dengan password database anda
-);
+// ZaynFlazz Configuration
+define('ZAYNFLAZZ_API_KEY', 'your_zaynflazz_api_key');
+define('ZAYNFLAZZ_API_URL', 'https://api.zaynflazz.com');
+define('ZAYNFLAZZ_WEBHOOK_URL', 'https://yourdomain.com/action/callback-zaynflazz.php');
 
-$conn = mysqli_connect($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['name']);
-if(!$conn) {
-	die("Koneksi Gagal : ".mysqli_connect_error());
-}
-$config['web'] = array(
-'url' => 'https://kincaiseluler.my.id/' //Ganti dengan domain anda, ex: https://kincaimedia.net/ (wajib diakhiri garis miring /)
-);
-
-// date & time
-$date = date("Y-m-d");
-$time = date("H:i:s");
-
-// versi
-$versi = '1.0.4';
-
-require("library/function.php");
-require("library/setting.php");
-
-?>
+// General Configuration
+define('SITE_URL', 'https://yourdomain.com');
+define('ADMIN_EMAIL', 'admin@yourdomain.com');
+define('AUTO_SYNC_INTERVAL', 21600); // 6 hours in seconds
+define('ORDER_CHECK_INTERVAL', 300); // 5 minutes in seconds
