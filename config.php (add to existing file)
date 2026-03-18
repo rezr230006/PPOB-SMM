@@ -1,0 +1,4 @@
+// path: config.php (add to existing file)
+// Pakasir Configuration
+define('PAKASIR_API_KEY', getenv('PAKASIR_API_KEY') ?: 'your-api-key-here');
+define('PAKASIR_PROJECT_SLUG', getenv('PAKASIR_PROJECT_SLUG') ?: 'your-project-slug');
