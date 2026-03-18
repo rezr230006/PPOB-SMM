@@ -1,68 +1,86 @@
 // path: library/PakasirService.php
 <?php
-require_once 'config.php';
-
 class PakasirService {
-    private $apiKey;
-    private $secretKey;
-    private $merchantId;
-    private $baseUrl = 'https://api.pakasir.com/v1';
-    
+    private $api_url = 'https://app.pakasir.com';
+    private $api_key;
+    private $project_slug;
+
     public function __construct() {
-        $this->apiKey = PAKASIR_API_KEY;
-        $this->secretKey = PAKASIR_SECRET_KEY;
-        $this->merchantId = PAKASIR_MERCHANT_ID;
+        $this->api_key = getenv('PAKASIR_API_KEY');
+        $this->project_slug = getenv('PAKASIR_PROJECT_SLUG');
     }
-    
-    public function createPayment($userId, $amount, $method = 'VA') {
+
+    public function createTransaction($order_id, $amount, $method = 'qris') {
+        $endpoint = $this->api_url . '/api/transactioncreate/' . $method;
+        
         $data = [
-            'merchant_id' => $this->merchantId,
+            'project' => $this->project_slug,
+            'order_id' => $order_id,
             'amount' => $amount,
-            'customer_name' => 'Customer-' . $userId,
-            'customer_email' => 'customer@example.com',
-            'customer_phone' => '08123456789',
-            'method' => $method,
-            'callback_url' => PAKASIR_WEBHOOK_URL,
-            'expired_time' => 3600
+            'api_key' => $this->api_key
         ];
+
+        $response = $this->sendRequest($endpoint, 'POST', $data);
         
-        $response = $this->makeRequest('/payments', $data, 'POST');
-        return $response;
-    }
-    
-    public function checkPaymentStatus($paymentId) {
-        $response = $this->makeRequest('/payments/' . $paymentId, [], 'GET');
-        return $response;
-    }
-    
-    public function verifyWebhook($signature, $payload) {
-        $expectedSignature = hash_hmac('sha256', $payload, $this->secretKey);
-        return hash_equals($expectedSignature, $signature);
-    }
-    
-    private function makeRequest($endpoint, $data = [], $method = 'GET') {
-        $url = $this->baseUrl . $endpoint;
-        $ch = curl_init();
-        
-        $headers = [
-            'Authorization: Bearer ' . $this->apiKey,
-            'Content-Type: application/json'
+        return [
+            'success' => $response['status'] === 'success',
+            'payment_number' => $response['payment_number'] ?? null,
+            'total_payment' => $response['total_payment'] ?? $amount,
+            'expired_at' => $response['expired_at'] ?? null,
+            'redirect_url' => $response['redirect_url'] ?? null
         ];
+    }
+
+    public function getTransactionStatus($order_id, $amount) {
+        $endpoint = $this->api_url . '/api/transactiondetail';
         
-        if ($method === 'POST') {
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $data = [
+            'project' => $this->project_slug,
+            'order_id' => $order_id,
+            'amount' => $amount,
+            'api_key' => $this->api_key
+        ];
+
+        return $this->sendRequest($endpoint, 'GET', $data);
+    }
+
+    public function generateRedirectUrl($order_id, $amount, $qris_only = false) {
+        $url = $this->api_url . '/pay/' . $this->project_slug . '/' . $amount . '?order_id=' . $order_id;
+        
+        if ($qris_only) {
+            $url .= '&qris_only=1';
         }
         
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        return $url;
+    }
+
+    private function sendRequest($url, $method, $data = null) {
+        $ch = curl_init();
         
+        $options = [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_TIMEOUT => 30
+        ];
+
+        if ($method === 'POST') {
+            $options[CURLOPT_POST] = true;
+            $options[CURLOPT_POSTFIELDS] = json_encode($data);
+            $options[CURLOPT_HTTPHEADER] = ['Content-Type: application/json'];
+        }
+
+        curl_setopt_array($ch, $options);
         $response = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
+        if ($httpCode !== 200) {
+            throw new Exception("API request failed with HTTP code $httpCode");
+        }
+
         return json_decode($response, true);
     }
 }
